@@ -10,6 +10,9 @@
 #  rename databases 
 #  delete unused databases 
 #  create empty base for future restore from backup file
+
+#  connection to remote server
+#  create backup database 
 #=================================================================================================================== 
 # description for options 
 COMMON_HELP="\n Скрипт для управления базами данных на сервере $HOSTNAME \n 
