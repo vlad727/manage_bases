@@ -75,7 +75,7 @@ case "$1" in
 		read old_name
 			echo "Please new name for database"
 				read new_name
-					psql -U  postgres -c "ALTER DATABASE $old_name RENAME TO new_name;"
+					psql -U  postgres -c "ALTER DATABASE $old_name RENAME TO $new_name;"
 						echo "Base has been renamed, please check for new name" 
 ;;
 "drop_base")
