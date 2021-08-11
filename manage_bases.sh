@@ -8,19 +8,19 @@
 # - restore base from backup file  
 # ALTER DATABASE "a-b" RENAME TO adashb; # if you want to drop database with "-"
 #=================================================================================================================== 
-COMMON_HELP=" Скрипт для управления базами данных на сервере $HOSTNAME \n 
+COMMON_HELP="\n Скрипт для управления базами данных на сервере $HOSTNAME \n 
 \n
 Введите режим работы: \n	
-show_databases     отобразить список баз данных на сервере $HOSTNAME \n
-create_copy        создать копию базы данных \n
-show_backups       отобразить список бэкапов \n
-unpack_base        разархивировать бэкап файл \n
-empty_base         создать пустую базу для будущего восстановления \n
-drop_base          удалить базу данных \n
-restore_base       восстановить базу данных из бэкапа \n
-rename_base        переименовать базу данных \n 
+show_databases\t\t     отобразить список баз данных на сервере $HOSTNAME \n
+create_copy\t\t       создать копию базы данных \n
+show_backups\t\t       отобразить список бэкапов \n
+unpack_base\t\t        разархивировать бэкап файл \n
+empty_base\t\t         создать пустую базу для будущего восстановления \n
+drop_base\t\t          удалить базу данных \n
+restore_base\t\t       восстановить базу данных из бэкапа \n
+rename_base\t\t        переименовать базу данных \n 
 \n
-example: ./manage_bases.sh restor_base or bash manage_bases.sh rename_base \n"
+examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
 
 # show help info
@@ -70,6 +70,14 @@ case "$1" in
 				echo "Empty base has been created with name $new_database" 
 ;;
 
+"rename_base")
+	echo "Pleas input database name which one do you want to rename: "
+		read old_name
+			echo "Please new name for database"
+				read new_name
+					psql -U  postgres -c "ALTER DATABASE $old_name RENAME TO new_name;"
+						echo "Base has been renamed, please check for new name" 
+;;
 "drop_base")
         echo "Input name database which one do you want to drop: "
 		read drop_name
