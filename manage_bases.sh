@@ -8,25 +8,34 @@
 # - restore base from backup file  
 # ALTER DATABASE "a-b" RENAME TO adashb; # if you want to drop database with "-"
 #=================================================================================================================== 
-# show help info 
-if [[ $# -eq 0 ]]; then
-	echo -e " Скрипт для управления базами данных на сервере $HOSTNAME \n 
-        Введите режим работы:	
-	show_databases     отобразить список баз данных на сервере $HOSTNAME
-	create_copy        создать копию базы данных
-        show_backups       отобразить список бэкапов
-        unpack_base        разархивировать бэкап файл 
-	empty_base         создать пустую базу для будущего восстановления
-	drop_base          удалить базу данных
-	restore_base       восстановить базу данных из бэкапа
-	rename_base        переименовать базу данных \n 
-	example: ./manage_bases.sh restor_base or bash manage_bases.sh rename_base \n"
+COMMON_HELP=" Скрипт для управления базами данных на сервере $HOSTNAME \n 
+\n
+Введите режим работы: \n	
+show_databases     отобразить список баз данных на сервере $HOSTNAME \n
+create_copy        создать копию базы данных \n
+show_backups       отобразить список бэкапов \n
+unpack_base        разархивировать бэкап файл \n
+empty_base         создать пустую базу для будущего восстановления \n
+drop_base          удалить базу данных \n
+restore_base       восстановить базу данных из бэкапа \n
+rename_base        переименовать базу данных \n 
+\n
+example: ./manage_bases.sh restor_base or bash manage_bases.sh rename_base \n"
 
-else
-	echo -e " Unknown option \n please use -h or --help "
+
+# show help info
+if [[ $# -eq 0 ]]; then
+	echo -e $COMMON_HELP
 fi
+
 #===================================================================================================================
 case "$1" in
+"--help")
+	echo -e $COMMON_HELP
+;;
+"-h")
+	echo -e $COMMON_HELP
+;;
 "show_databases")
 	psql -U postgres -c '\l'
 ;;
