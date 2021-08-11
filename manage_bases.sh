@@ -1,18 +1,20 @@
 #!/bin/bash 
 
-# That script allows: 
-# - show list of bases
-# - create copy base on the same server
-# - show backup files
-# - unpack backup file 
-# - restore base from backup file  
-# ALTER DATABASE "a-b" RENAME TO adashb; # if you want to drop database with "-"
+#  That script allows: 
+#  create copy base on the same server
+#  show backup files in backup directory
+#  unpack backup file unpigz 
+#  restore base from backup file   
+#  show postgresql databases 
+#  rename databases 
+#  delete bases
+#  create empty base for future restore from backup file
 #=================================================================================================================== 
 COMMON_HELP="\n Скрипт для управления базами данных на сервере $HOSTNAME \n 
 \n
 Введите режим работы: \n	
 show_databases\t\t     отобразить список баз данных на сервере $HOSTNAME \n
-create_copy\t\t       создать копию базы данных \n
+create_copy\t\t        создать копию базы данных \n
 show_backups\t\t       отобразить список бэкапов \n
 unpack_base\t\t        разархивировать бэкап файл \n
 empty_base\t\t         создать пустую базу для будущего восстановления \n
