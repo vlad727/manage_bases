@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# That script allow: 
+# That script allows: 
 # - show list of bases
 # - create copy base on the same server
 # - show backup files
@@ -9,16 +9,21 @@
 # ALTER DATABASE "a-b" RENAME TO adashb; # if you want to drop database with "-"
 #=================================================================================================================== 
 # show help info 
-if test $# -eq 0; then
-	echo " Введите режим работы:"
-	echo " bash manage_bases.sh show_databases     отобразить список баз данных на сервере $HOSTNAME"
-	echo " bash manage_bases.sh create_copy        создать копию базы данных"
-        echo " bash manage_bases.sh show_backups       отобразить список бэкапов"
-        echo " bash manage_bases.sh unpack_base        разархивировать бэкап файл" 
-	echo " bash manage_bases.sh empty_base         создать пустую базу для будущего восстановления"
-	echo " bash manage_bases.sh drop_base          удалить базу данных"
-	echo " bash manage_bases.sh restore_base       восстановить базу данных из бэкапа"
-	echo " bash manage_bases.sh rename_base        переименовать базу данных"
+if [[ $# -eq 0 ]]; then
+	echo -e " Скрипт для управления базами данных на сервере $HOSTNAME \n 
+        Введите режим работы:	
+	show_databases     отобразить список баз данных на сервере $HOSTNAME
+	create_copy        создать копию базы данных
+        show_backups       отобразить список бэкапов
+        unpack_base        разархивировать бэкап файл 
+	empty_base         создать пустую базу для будущего восстановления
+	drop_base          удалить базу данных
+	restore_base       восстановить базу данных из бэкапа
+	rename_base        переименовать базу данных \n 
+	example: ./manage_bases.sh restor_base or bash manage_bases.sh rename_base \n"
+
+else
+	echo -e " Unknown option \n please use -h or --help "
 fi
 #===================================================================================================================
 case "$1" in
