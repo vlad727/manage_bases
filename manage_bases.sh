@@ -1,15 +1,17 @@
 #!/bin/bash 
 
-#  That script allows: 
-#  create copy base on the same server
+
+#  That script allow: 
+#  create copy base on the same server for tests
 #  show backup files in backup directory
-#  unpack backup file unpigz 
-#  restore base from backup file   
-#  show postgresql databases 
+#  unpack backup file unpigz  
+#  restore base from backup file to empty base   
+#  show postgresql databases on local server
 #  rename databases 
-#  delete bases
+#  delete unused databases 
 #  create empty base for future restore from backup file
 #=================================================================================================================== 
+# description for options 
 COMMON_HELP="\n Скрипт для управления базами данных на сервере $HOSTNAME \n 
 \n
 Введите режим работы: \n	
@@ -25,12 +27,13 @@ rename_base\t\t        переименовать базу данных \n
 examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
 
-# show help info
+#  show help info
 if [[ $# -eq 0 ]]; then
 	echo -e $COMMON_HELP
 fi
 
 #===================================================================================================================
+# case and conditionals
 case "$1" in
 "--help")
 	echo -e $COMMON_HELP
@@ -62,7 +65,7 @@ case "$1" in
                 read srcfile
 			echo "Unpack process may take for 15 min"
 				unpigz /backup_disk/backups/$srcfile
-					echo "File is unpacked!!! Run again "show_backups" to get new file name" 
+					echo "File is unpacked! Run again "show_backups" to get new file name" 
 ;;
 
 "empty_base")
