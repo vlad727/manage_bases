@@ -24,7 +24,7 @@ empty_base\t\t         создать пустую базу для будуще�
 drop_base\t\t          удалить базу данных \n
 restore_base\t\t       восстановить базу данных из бэкапа \n
 rename_base\t\t        переименовать базу данных \n
-create_backup\t\t      создать бэкап базыданных \n
+create_backup\t\t      создать бэкап базы данных \n
 \n
 examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
@@ -103,8 +103,9 @@ case "$1" in
 "create_backup")
 	echo "Input base name: "
 		read file_name
-			pg_dump -U postgres -c $file_name | pigz > /backup_disk/backups/$(date +"%Y-%m-%d_%H-%M").buh.sql.gz
-				echo "Backup for base $file_name has been created""
+			pg_dump -U postgres -c $file_name | pigz > /backup_disk/backups/$(date +"%Y-%m-%d_%H-%M").$file_name.sql.gz
+				echo "Backup for base $file_name has been created"
+;;
 		
 
 esac
