@@ -10,8 +10,6 @@
 #  rename databases 
 #  delete unused databases 
 #  create empty base for future restore from backup file
-
-#  connection to remote server
 #  create backup database 
 #=================================================================================================================== 
 # description for options 
@@ -25,7 +23,8 @@ unpack_base\t\t        разархивировать бэкап файл \n
 empty_base\t\t         создать пустую базу для будущего восстановления \n
 drop_base\t\t          удалить базу данных \n
 restore_base\t\t       восстановить базу данных из бэкапа \n
-rename_base\t\t        переименовать базу данных \n 
+rename_base\t\t        переименовать базу данных \n
+create_backup\t\t      создать бэкап базыданных \n
 \n
 examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
@@ -100,4 +99,12 @@ case "$1" in
 				read empty_base_name
 					psql -U postgres $empty_base_name < /backup_disk/backups/$file_name
 ;;
+
+"create_backup")
+	echo "Input base name: "
+		read file_name
+			pg_dump -U postgres -c $file_name | pigz > /backup_disk/backups/$(date +"%Y-%m-%d_%H-%M").buh.sql.gz
+				echo "Backup for base $file_name has been created""
+		
+
 esac
