@@ -73,7 +73,7 @@ case "$1" in
 "empty_base")
 	echo "Input name for new empty database: "
 		read new_database
-			psql -U  postgres -c "CREATE DATABASE -T template0 $new_database;"
+			psql -U  postgres -c "CREATE DATABASE  $new_database;"
 				echo "Empty base has been created with name $new_database" 
 ;;
 
