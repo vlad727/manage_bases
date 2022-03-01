@@ -45,6 +45,13 @@ fi
 read -r -p "Please input database name: " db_name
 /usr/bin/pg_dump -U postgres  $db_name | pigz > /mnt/$(date +"%Y-%m-%d_%H-%M").$db_name.sql.gz
 
+if [ $? = 0 ]
+  then
+    echo "Succesed backup"
+else
+  echo "Error backup files!"
+fi
+
 }
 #  show help info
 if [[ $# -eq 0 ]]; then
