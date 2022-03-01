@@ -34,7 +34,7 @@ examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 backup_func() {
 sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
 
-if  mount | grep mnt:
+if  mount | grep mnt;
 then
   echo "Server backup mounted"
 else
