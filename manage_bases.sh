@@ -32,7 +32,7 @@ examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 #===================================================================================================================
 # functions
 backup_func() {
-sudo mount -t cifs -o username=share //win10/share_win10 /mnt -o credentials=/root/credentials >> /dev/null
+sudo mount -t cifs -o username=share file_mode=0777,dir_mode=0777 //win10/share_win10 /mnt -o credentials=/root/credentials >> /dev/null
 
 if  mount | grep mnt >> /dev/null;
 then
