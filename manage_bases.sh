@@ -31,7 +31,7 @@ examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
 #===================================================================================================================
 # functions
-def backup_func(){
+backup_func() {
 sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
 
 if  mount | grep mnt:
