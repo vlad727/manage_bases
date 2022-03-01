@@ -32,9 +32,9 @@ examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 #===================================================================================================================
 # functions
 backup_func() {
-sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
+sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials >> /dev/null
 
-if  mount | grep mnt;
+if  mount | grep mnt >> /dev/null;
 then
   echo "Server backup mounted"
 else
