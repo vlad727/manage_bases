@@ -24,10 +24,23 @@ drop_db\t\t          удалить базу данных \n
 restore_db\t\t       восстановить базу данных из бэкапа \n
 rename_db\t\t        переименовать базу данных \n
 create_backup\t\t      создать бэкап базы данных \n
+backup_remoute\t\t      создать бэкап базы данных на удалнный сервер \n
 \n
 examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 
 
+#===================================================================================================================
+# functions
+def backup_func(){
+sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
+
+if  mount | grep mnt:
+then
+  echo "Server backup mounted"
+else
+  echo "Failed to mount remoute folder"
+fi
+}
 #  show help info
 if [[ $# -eq 0 ]]; then
 	echo -e $COMMON_HELP
@@ -105,17 +118,13 @@ case "$1" in
 			pg_dump -U postgres -c $file_name | pigz > /backup_disk/backups/$(date +"%Y-%m-%d_%H-%M").$file_name.sql.gz
 				echo "Backup for base $file_name has been created"
 ;;
+"backup_remoute")
+  echo "It will create backup to remoute server"
+    backup_func
+;;
 		
 
 esac
 
 #===================================================================================================================
 # backup to the server backup
-sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
-
-if  mount | grep mnt:
-then
-  echo "Server backup mounted"
-else
-  echo "Failed to mount remoute folder"
-fi 
