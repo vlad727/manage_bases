@@ -52,6 +52,8 @@ else
   echo "Error backup files!"
 fi
 
+sudo umount /mnt
+
 }
 #  show help info
 if [[ $# -eq 0 ]]; then
