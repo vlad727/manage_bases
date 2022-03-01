@@ -42,8 +42,11 @@ else
 fi
 # start backup for db
 #echo "Please input database name for this action"
+# ask for base name
 read -r -p "Please input database name: " db_name
+# mount dir to /mnt and send db to remoute server
 /usr/bin/pg_dump -U postgres  $db_name | pigz > /mnt/$(date +"%Y-%m-%d_%H-%M").$db_name.sql.gz
+
 
 if [ $? = 0 ]
   then
