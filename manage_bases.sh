@@ -108,3 +108,14 @@ case "$1" in
 		
 
 esac
+
+#===================================================================================================================
+# backup to the server backup
+sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials
+
+if  mount | grep mnt:
+then
+  echo "Server backup mounted"
+else
+  echo "Failed to mount remoute folder"
+fi 
