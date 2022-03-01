@@ -32,7 +32,7 @@ examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
 #===================================================================================================================
 # functions
 backup_func() {
-sudo mount -t cifs -o username=share //win10/share /mnt -o credentials=/root/credentials >> /dev/null
+sudo mount -t cifs -o username=share //win10/share_win10 /mnt -o credentials=/root/credentials >> /dev/null
 
 if  mount | grep mnt >> /dev/null;
 then
@@ -40,6 +40,11 @@ then
 else
   echo "Failed to mount remoute folder"
 fi
+# start backup for db
+#echo "Please input database name for this action"
+read -r -p "Please input database name: " db_name
+/usr/bin/pg_dump -U postgres  $db_name | pigz > /mnt/$(date +"%Y-%m-%d_%H-%M").$db_name.sql.gz
+
 }
 #  show help info
 if [[ $# -eq 0 ]]; then
