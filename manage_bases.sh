@@ -1,6 +1,5 @@
 #!/bin/bash 
 
-
 #  That script allow: 
 #  create copy base on the same server for tests
 #  show backup files in backup directory
@@ -16,14 +15,14 @@
 COMMON_HELP="\n Скрипт для управления базами данных на сервере $HOSTNAME \n 
 \n
 Введите режим работы: \n	
-show_databases\t\t     отобразить список баз данных на сервере $HOSTNAME \n
+show_db\t\t     отобразить список баз данных на сервере $HOSTNAME \n
 create_copy\t\t        создать копию базы данных \n
-show_backups\t\t       отобразить список бэкапов \n
-unpack_base\t\t        разархивировать бэкап файл \n
-empty_base\t\t         создать пустую базу для будущего восстановления \n
-drop_base\t\t          удалить базу данных \n
-restore_base\t\t       восстановить базу данных из бэкапа \n
-rename_base\t\t        переименовать базу данных \n
+show_backup\t\t       отобразить список бэкапов \n
+unpack_db\t\t        разархивировать бэкап файл \n
+empty_db\t\t         создать пустую базу для будущего восстановления \n
+drop_db\t\t          удалить базу данных \n
+restore_db\t\t       восстановить базу данных из бэкапа \n
+rename_db\t\t        переименовать базу данных \n
 create_backup\t\t      создать бэкап базы данных \n
 \n
 examples:\n ./manage_bases.sh unpack_base\n bash manage_bases.sh rename_base \n"
@@ -43,7 +42,7 @@ case "$1" in
 "-h")
 	echo -e $COMMON_HELP
 ;;
-"show_databases")
+"show_db")
 	psql -U postgres -c '\l'
 ;;
 
@@ -62,7 +61,7 @@ case "$1" in
 		ls -lh  /backup_disk/backups/ | awk '{print $5 "      " $6 "      " $7 "      " $8 "                  " $9}'
 ;;
 
-"unpack_base")
+"unpack_db")
 	echo "Input file source name: "
                 read srcfile
 			echo "Unpack process may take for 15 min"
@@ -70,14 +69,14 @@ case "$1" in
 					echo "File is unpacked! Run again "show_backups" to get new file name" 
 ;;
 
-"empty_base")
+"empty_db")
 	echo "Input name for new empty database: "
 		read new_database
 			psql -U  postgres -c "CREATE DATABASE  $new_database;"
 				echo "Empty base has been created with name $new_database" 
 ;;
 
-"rename_base")
+"rename_db")
 	echo "Pleas input database name which one do you want to rename: "
 		read old_name
 			echo "Please new name for database"
@@ -85,14 +84,14 @@ case "$1" in
 					psql -U  postgres -c "ALTER DATABASE $old_name RENAME TO $new_name;"
 						echo "Base has been renamed, please check for new name" 
 ;;
-"drop_base")
+"drop_db")
         echo "Input name database which one do you want to drop: "
 		read drop_name
 			psql -U postgres -c "DROP DATABASE $drop_name;"
 				echo "Base with name $drop_name has been dropped"
 ;;
 
-"restore_base")
+"restore_db")
 	echo "Input backup file name: "
 		read file_name
 			echo "Input empty base name: "
