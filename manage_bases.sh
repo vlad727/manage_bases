@@ -16,6 +16,7 @@ COMMON_HELP="\n Скрипт для управления базами данны
 \n
 Введите режим работы: \n	
 show_db\t\t     отобразить список баз данных на сервере $HOSTNAME \n
+show_db_size\t\t    отобразить размер баз данных\n
 create_copy\t\t        создать копию базы данных \n
 show_backup\t\t       отобразить список бэкапов \n
 unpack_db\t\t        разархивировать бэкап файл \n
@@ -74,8 +75,14 @@ case "$1" in
 ;;
 "show_db")
 	psql -U postgres -c '\l'
-;;
 
+
+;;
+"show_db_size")
+	psql -U postgres -c '\l+'
+
+
+;;
 "create_copy")
 	echo "Input source base name:"
 		read srcbase 
