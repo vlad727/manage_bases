@@ -74,7 +74,7 @@ case "$1" in
         echo -e $COMMON_HELP
 ;;
 "show_db")
-        psql -U postgres -c '\l' |  awk '{print $1}' | grep -v "|\|template*\|postgres\|(8" | sed 1,2d;
+       psql -U postgres -c '\l+' |  awk '{print $1 " " $12 $13}' | grep -v "|\|template*\|postgres\|(8" | sed 1,2d; 
 
 
 ;;
